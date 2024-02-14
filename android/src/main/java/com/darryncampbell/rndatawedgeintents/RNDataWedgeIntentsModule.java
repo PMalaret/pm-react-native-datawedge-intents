@@ -7,6 +7,7 @@ import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
 import android.util.Log;
 import android.net.Uri;
+import android.os.Build;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -105,7 +106,11 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_ENUMERATEDLISET);
-        reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter, reactContext.RECEIVER_EXPORTED);
+        } else {
+            reactContext.registerReceiver(myEnumerateScannersBroadcastReceiver, filter);
+        }
 	    if (this.registeredAction != null)
           registerReceiver(this.registeredAction, this.registeredCategory);
           
