@@ -1,4 +1,4 @@
-package com.darryncampbell.rndatawedgeintents;
+package com.projectmain.rndatawedgeintents;
 
 import android.content.Intent;
 import android.content.ComponentName;
@@ -414,7 +414,7 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
     }
 
     //  Broadcast receiver for the response to the Enumerate Scanner API
-    //  THIS METHOD IS DEPRECATED, you should enumerate scanners as shown in https://github.com/darryncampbell/DataWedgeReactNative/blob/master/App.js
+    //  THIS METHOD IS DEPRECATED, you should enumerate scanners as shown in https://github.com/PMalaret/DataWedgeReactNative/blob/master/App.js
     public BroadcastReceiver myEnumerateScannersBroadcastReceiver = new BroadcastReceiver() 
     {    
         @Override
@@ -426,7 +426,7 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
 
     //  Broadcast receiver for the DataWedge intent being sent from Datawedge.  
     //  Note: DW must be configured to send broadcast intents
-    //  THIS METHOD IS DEPRECATED, you should enumerate scanners as shown in https://github.com/darryncampbell/DataWedgeReactNative/blob/master/App.js
+    //  THIS METHOD IS DEPRECATED, you should enumerate scanners as shown in https://github.com/PMalaret/DataWedgeReactNative/blob/master/App.js
     public BroadcastReceiver scannedDataBroadcastReceiver = new BroadcastReceiver() 
     {    
         @Override
