@@ -15,10 +15,9 @@ This module is useful when developing React Native applications for Zebra mobile
 ### Installation
 
 ```bash
-npm install react-native-datawedge-intents --save
+npm install pm-react-native-datawedge-intents --save
 react-native link react-native-datawedge-intents 
 ```
-Note: as of ReactNative version 0.27 automatic installation of modules is supported via react-native link ... If you are running a version earlier than 0.26 then you will be required to manually install the module.  More detail on manual installation of a typical module can be found [here](https://github.com/Microsoft/react-native-code-push#plugin-installation-android---manual).
 
 ## Example usage
 
@@ -27,7 +26,7 @@ There are two samples available for this module:
 **Please see [RNDataWedgeIntentDemo](https://github.com/darryncampbell/RNDataWedgeIntentDemo) for a basic sample application that makes use of this module**, file [index.android.js](https://github.com/darryncampbell/RNDataWedgeIntentDemo/blob/master/index.android.js).  This application is a little dated now and is designed to work with version 0.0.2 of this module.
 
 ```javascript
-import DataWedgeIntents from 'react-native-datawedge-intents'
+import DataWedgeIntents from 'pm-react-native-datawedge-intents'
 ...
 //  Register a receiver for the barcode scans with the appropriate action
 DataWedgeIntents.registerReceiver('com.zebra.dwintents.ACTION', '');
@@ -43,10 +42,10 @@ DataWedgeIntents.sendIntent(DataWedgeIntents.ACTION_SOFTSCANTRIGGER,DataWedgeInt
 
 ```
 
-**Please see [DataWedgeReactNative](https://github.com/darryncampbell/DataWedgeReactNative) for a more fully featured and up to date application that makes use of this module**, file [App.js](https://github.com/darryncampbell/DataWedgeReactNative/blob/master/App.js).  This application requires a minimum version of 0.1.0 of this module.
+**Please see [DataWedgeReactNative](https://github.com/PMalaret/DataWedgeReactNative) for a more fully featured and up to date application that makes use of this module**, file [App.js](https://github.com/PMalaret/DataWedgeReactNative/blob/master/App.js).  This application requires a minimum version of 0.2.0 of this module.
 
 ```javascript
-import DataWedgeIntents from 'react-native-datawedge-intents'
+import DataWedgeIntents from 'pm-react-native-datawedge-intents'
 ...
 //  Register a receiver for the barcode scans with the appropriate action
 DataWedgeIntents.registerBroadcastReceiver({
@@ -85,7 +84,7 @@ This module **requires the DataWedge service running** on the target device to b
 
 ### Output Plugin
 
-Please also ensure you disable the keyboard output plugin to avoid undesired effects on your application: [thread](https://developer.zebra.com/message/95397).
+Please also ensure you disable the keyboard output plugin to avoid undesired effects on your application.
 
 For more information about DataWedge and how to configure it please visit Zebra [tech docs](http://techdocs.zebra.com/).  The DataWedge API that this module calls is detailed [here](http://techdocs.zebra.com/datawedge/latest/guide/api/)
 
