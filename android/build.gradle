@@ -5,6 +5,10 @@ def safeExtGet(prop, fallback) {
 apply plugin: 'com.android.library'
 
 android {
+    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+    if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+        namespace "com.darryncampbell.rndatawedgeintents"
+    }
     compileSdkVersion safeExtGet('compileSdkVersion', 27)
     //noinspection GradleDependency
     buildToolsVersion safeExtGet('buildToolsVersion', '27.0.3')
@@ -21,4 +25,3 @@ android {
 dependencies {
     implementation 'com.facebook.react:react-native:+'
 }
-
