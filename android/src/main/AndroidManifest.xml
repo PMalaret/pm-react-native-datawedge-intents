@@ -1,3 +1,21 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.projectmain.rndatawedgeintents">
+
+    <!-- Permisos necesarios para DataWedge (si aplica) -->
+    <uses-permission android:name="com.symbol.datawedge.api.PERMISSION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application>
+        <!-- Declaración del BroadcastReceiver para Android 12+ -->
+        <receiver
+            android:name=".RNDataWedgeIntentsModule$genericReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.symbol.datawedge.api.RESULT_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+    </application>
 
 </manifest>

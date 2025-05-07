@@ -394,7 +394,13 @@ public class RNDataWedgeIntentsModule extends ReactContextBaseJavaModule impleme
                 }
             }
         }
-        this.reactContext.registerReceiver(genericReceiver, filter);
+        
+        // Modificación para Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            this.reactContext.registerReceiver(genericReceiver, filter, Context.RECEIVER_EXPORTED);
+        } else {
+            this.reactContext.registerReceiver(genericReceiver, filter);
+        }
     }
 
     private void unregisterReceivers() {

@@ -1,17 +1,20 @@
 /**
- * @providesModule DataWedgeIntents
+ * React Native module for DataWedge Intents integration
+ * @module DataWedgeIntents
  */
 
 'use strict';
 
-var { Platform, NativeModules } = require('react-native');
+import { Platform, NativeModules } from 'react-native';
 
-if (Platform.OS === 'android')
-{
-    var RNDataWedgeIntents = NativeModules.DataWedgeIntents;
+// Solo inicializamos si estamos en Android
+let DataWedgeIntents = {};
 
-    var DataWedgeIntents = {
-        //  Specifying the DataWedge API constants in this module is deprecated.  It is not feasible to stay current with the DW API.
+if (Platform.OS === 'android') {
+    const { DataWedgeIntents: RNDataWedgeIntents } = NativeModules;
+
+    // Constants (consider removing deprecated ones in future versions)
+    const DEPRECATED_CONSTANTS = {
         ACTION_SOFTSCANTRIGGER: RNDataWedgeIntents.ACTION_SOFTSCANTRIGGER,
         ACTION_SCANNERINPUTPLUGIN: RNDataWedgeIntents.ACTION_SCANNERINPUTPLUGIN,
         ACTION_ENUMERATESCANNERS: RNDataWedgeIntents.ACTION_ENUMERATESCANNERS,
@@ -23,21 +26,50 @@ if (Platform.OS === 'android')
         TOGGLE_SCANNING: RNDataWedgeIntents.TOGGLE_SCANNING,
         ENABLE_PLUGIN: RNDataWedgeIntents.ENABLE_PLUGIN,
         DISABLE_PLUGIN: RNDataWedgeIntents.DISABLE_PLUGIN,
+    };
 
+    // Definimos las funciones dentro de DataWedgeIntents solo si estamos en Android
+    DataWedgeIntents = {
+        ...DEPRECATED_CONSTANTS,
+
+        /**
+         * @deprecated Use sendBroadcastWithExtras instead
+         */
         sendIntent(action, parameterValue) {
-            //  THIS METHOD IS DEPRECATED, use SendBroadcastWithExtras
-            RNDataWedgeIntents.sendIntent(action, parameterValue);
+            console.warn('sendIntent is deprecated. Use sendBroadcastWithExtras instead.');
+            return RNDataWedgeIntents.sendIntent(action, parameterValue);
         },
+
+        /**
+         * Send broadcast with extras to DataWedge
+         * @param {Object} extrasObject - The extras to include in the broadcast
+         */
         sendBroadcastWithExtras(extrasObject) {
-            RNDataWedgeIntents.sendBroadcastWithExtras(extrasObject);
+            if (!extrasObject || typeof extrasObject !== 'object') {
+                throw new Error('extrasObject must be a valid object');
+            }
+            return RNDataWedgeIntents.sendBroadcastWithExtras(extrasObject);
         },
+
+        /**
+         * Register broadcast receiver for DataWedge intents
+         * @param {Object} filter - The intent filter configuration
+         */
         registerBroadcastReceiver(filter) {
-            RNDataWedgeIntents.registerBroadcastReceiver(filter);
+            if (!filter || typeof filter !== 'object') {
+                throw new Error('filter must be a valid object');
+            }
+            return RNDataWedgeIntents.registerBroadcastReceiver(filter);
         },
+
+        /**
+         * @deprecated Use registerBroadcastReceiver instead
+         */
         registerReceiver(action, category) {
-            //  THIS METHOD IS DEPRECATED, use registerBroadcastReceiver
-            RNDataWedgeIntents.registerReceiver(action, category);
+            console.warn('registerReceiver is deprecated. Use registerBroadcastReceiver instead.');
+            return RNDataWedgeIntents.registerReceiver(action, category);
         },
     };
-    module.exports = DataWedgeIntents;
 }
+
+export default DataWedgeIntents;

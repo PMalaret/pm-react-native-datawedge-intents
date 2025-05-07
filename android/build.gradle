@@ -9,19 +9,40 @@ android {
     if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
         namespace "com.projectmain.rndatawedgeintents"
     }
-    compileSdkVersion safeExtGet('compileSdkVersion', 27)
-    //noinspection GradleDependency
-    buildToolsVersion safeExtGet('buildToolsVersion', '27.0.3')
+    
+    compileSdkVersion safeExtGet('compileSdkVersion', 33)
+    buildToolsVersion safeExtGet('buildToolsVersion', '33.0.0')
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 16)
-        //noinspection OldTargetApi
-        targetSdkVersion safeExtGet('targetSdkVersion', 27)
-        versionCode 7
-        versionName "0.0.1"
+        minSdkVersion safeExtGet('minSdkVersion', 21)  // Android 5.0 (Lollipop)
+        targetSdkVersion safeExtGet('targetSdkVersion', 33)
+        versionCode 8
+        versionName "0.3.0"
+        
+        // Configuración para Java 8
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
+    // Evita conflictos con archivos LICENSE.txt
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
     }
 }
 
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.facebook.react:react-native:+'  // Usa la versión de React Native del proyecto host
+    
+    // Dependencias recomendadas
+    implementation 'androidx.annotation:annotation:1.6.0'  // Para @NonNull y @Nullable
+    implementation 'androidx.core:core-ktx:1.10.0'        // Extensiones de Kotlin (opcional)
+    
+    // Dependencias para testing (opcional)
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
